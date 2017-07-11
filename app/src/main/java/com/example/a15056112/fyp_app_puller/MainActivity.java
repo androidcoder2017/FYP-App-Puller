@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -32,11 +33,13 @@ public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
-
+    
     ListView lv;
     SearchView sv;
 
     List<Gate> gateList;
+
+    GateAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,8 +47,9 @@ public class MainActivity extends AppCompatActivity {
 
         lv = (ListView)findViewById(R.id.lv);
 
-        mDatabaseGates = FirebaseDatabase.getInstance().getReference().child("Gate");
 
+        mDatabaseGates = FirebaseDatabase.getInstance().getReference().child("Gate");
+        mQuery = mDatabaseGates.orderByChild("gateName");
         gateList = new ArrayList<>();
 
         mAuth = FirebaseAuth.getInstance();
@@ -63,6 +67,19 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         };
+
+       /* sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return false;
+            }
+        }); */
 
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
 
@@ -85,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
 
         mAuth.addAuthStateListener(mAuthListener);
 
-        mDatabaseGates.addValueEventListener(new ValueEventListener() {
+        mQuery.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
