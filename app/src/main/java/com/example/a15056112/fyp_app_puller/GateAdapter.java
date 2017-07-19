@@ -27,7 +27,7 @@ import java.util.logging.Filter;
  * Created by 15056112 on 20/6/2017.
  */
 
-public class GateAdapter extends ArrayAdapter<Gate> implements SectionIndexer {
+public class GateAdapter extends ArrayAdapter<Gate> implements SectionIndexer, Filterable {
 
     private Activity context;
     private List<Gate> gateList;
