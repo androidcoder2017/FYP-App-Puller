@@ -7,16 +7,6 @@
     android:orientation="vertical"
     tools:context="com.example.a15056112.fyp_app_puller.MainActivity">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <SearchView
-            android:id="@+id/searchview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:queryHint="Search Gate(e.g. E1)..."/>
 
         <Button
         android:id="@+id/button2"
@@ -25,7 +15,6 @@
         android:layout_gravity="right"
         android:text="Message" />
 
-    </LinearLayout>
 
 
     <TextView

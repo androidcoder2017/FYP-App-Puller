@@ -2,6 +2,7 @@ package com.example.a15056112.fyp_app_puller;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
@@ -22,6 +23,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener mAuthListener;
     
     ListView lv;
-    SearchView sv;
 
     List<Gate> gateList;
 
@@ -48,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
         lv = (ListView)findViewById(R.id.lv);
 
+        //sv = (SearchView)findViewById(R.id.searchview);
 
         mDatabaseGates = FirebaseDatabase.getInstance().getReference().child("Gate");
         mQuery = mDatabaseGates.orderByChild("gateName");
@@ -69,18 +71,6 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-        /*sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                adapter.getFilter().filter(newText);
-                return false;
-            }
-        }); */
 
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
 
@@ -141,6 +131,43 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
 
         getMenuInflater().inflate(R.menu.main_menu, menu);
+
+        final MenuItem searchItem = menu.findItem(R.id.item_search);
+        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                final List<Gate> gateSearchList = new ArrayList<Gate>();
+                ListView lvSearch;
+
+                lvSearch = (ListView)findViewById(R.id.lv);
+                for (Gate gate : gateList) {
+                    if (gate.getGateName().toLowerCase().contains(newText.toLowerCase())) {
+                        gateSearchList.add(gate);
+                        lvSearch.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                Gate gate = gateSearchList.get(position);
+                                Intent intent = new Intent(getApplicationContext(), GateInformation.class);
+                                intent.putExtra("terminalname", gate.getTerminalName());
+                                intent.putExtra("gatename", gate.getGateName());
+                                startActivity(intent);
+                            }
+                        });
+                    }
+                }
+
+                adapter = new GateAdapter(MainActivity.this, gateSearchList);
+                lvSearch.setAdapter(adapter);
+                return true;
+            }
+        });
 
         return super.onCreateOptionsMenu(menu);
     }

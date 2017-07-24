@@ -8,6 +8,7 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -32,9 +33,12 @@ public class GateInformation extends AppCompatActivity {
     ListView lvDetails;
 
     DatabaseReference mDatabaseDetails;
-
+    DatabaseReference mDatabaseDetails1;
     List<Information> detailList;
 
+    //Asif's logic
+    //ArrayList<String> alDate;
+    // get current date / for loop to check if today is the date in the alDate/ if yes, .childdate(
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,9 +71,16 @@ public class GateInformation extends AppCompatActivity {
         SimpleDateFormat tf = new SimpleDateFormat("HH:mm");
         final String formattedTime = tf.format(calendar.getTime());
 
-        mDatabaseDetails = FirebaseDatabase.getInstance().getReference().child("Gate").child(gatename).child("DaySlot").child("13-7-2017").child("Flight").child("13:00");
+        mDatabaseDetails = FirebaseDatabase.getInstance().getReference().child("Gate").child(gatename).child("DaySlot").child("24-7-2017").child("Flight").child("19:00");
+
 
         //mDatabaseDetails = FirebaseDatabase.getInstance().getReference().child("Gate").child(gatename).child("DaySlot").child(formattedDate).child("Flight").child(formattedTime);
+
+        //Asif's logic
+        /*mDatabaseDetails1 = FirebaseDatabase.getInstance().getReference().child("Gate").child(gatename).child("DaySlot").child(formattedDate).child("Flight");
+        String date = mDatabaseDetails1.getKey().toString();
+        Toast.makeText(this, date, Toast.LENGTH_SHORT).show();*/
+
     }
 
 
@@ -82,10 +93,10 @@ public class GateInformation extends AppCompatActivity {
             public void onDataChange(DataSnapshot gateSnapshot) {
                 detailList.clear();
 
-                //for (DataSnapshot gateSnapshot: dataSnapshot.getChildren()) {
+
                     Information info = gateSnapshot.getValue(Information.class);
                     detailList.add(info);
-                //}
+
 
                 final InformationAdapter adapter = new InformationAdapter(GateInformation.this, detailList);
                 lvDetails.setAdapter(adapter);

@@ -27,7 +27,7 @@ import java.util.logging.Filter;
  * Created by 15056112 on 20/6/2017.
  */
 
-public class GateAdapter extends ArrayAdapter<Gate> implements SectionIndexer, Filterable {
+public class GateAdapter extends ArrayAdapter<Gate> {
 
     private Activity context;
     private List<Gate> gateList;
@@ -56,20 +56,20 @@ public class GateAdapter extends ArrayAdapter<Gate> implements SectionIndexer, F
         return listViewGate;
     }
 
-    @Override
-    public Object[] getSections() {
-        return new Object[0];
-    }
-
-    @Override
-    public int getPositionForSection(int sectionIndex) {
-        return 0;
-    }
-
-    @Override
-    public int getSectionForPosition(int position) {
-        return 0;
-    }
+//    @Override
+//    public Object[] getSections() {
+//        return new Object[0];
+//    }
+//
+//    @Override
+//    public int getPositionForSection(int sectionIndex) {
+//        return 0;
+//    }
+//
+//    @Override
+//    public int getSectionForPosition(int position) {
+//        return 0;
+//    }
 
 
 
