@@ -15,6 +15,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
@@ -38,9 +39,8 @@ public class GateInformation extends AppCompatActivity {
     DatabaseReference mDatabaseDetails1;
     List<Information> detailList;
 
-    //Asif's logic
-    //ArrayList<String> alDate;
-    // get current date / for loop to check if today is the date in the alDate/ if yes, .childdate(
+    private Query mQueryDate, mQueryTime;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,16 +73,13 @@ public class GateInformation extends AppCompatActivity {
         SimpleDateFormat tf = new SimpleDateFormat("HH:mm");
         final String formattedTime = tf.format(calendar.getTime());
 
+
         //mDatabaseDetails = FirebaseDatabase.getInstance().getReference().child("Gate").child(gatename).child("DaySlot").child("24-7-2017").child("Flight").child("19:00");
 
 
+        mDatabaseDetails = FirebaseDatabase.getInstance().getReference().child("Gate").child(gatename).child("DaySlot").child(formattedDate).child("Flight");
 
-        mDatabaseDetails = FirebaseDatabase.getInstance().getReference().child("Gate").child(gatename).child("DaySlot").child(formattedDate).child("Flight").child(formattedTime);
 
-        //Asif's logic
-        /*mDatabaseDetails1 = FirebaseDatabase.getInstance().getReference().child("Gate").child(gatename).child("DaySlot").child(formattedDate).child("Flight");
-        String date = mDatabaseDetails1.getKey().toString();
-        Toast.makeText(this, date, Toast.LENGTH_SHORT).show();*/
 
     }
 
@@ -93,13 +90,14 @@ public class GateInformation extends AppCompatActivity {
 
         mDatabaseDetails.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot gateSnapshot) {
+            public void onDataChange(DataSnapshot dataSnapshot) {
                 detailList.clear();
 
+                for (DataSnapshot gateSnapshot: dataSnapshot.getChildren()) {
 
                     Information info = gateSnapshot.getValue(Information.class);
                     detailList.add(info);
-
+                }
 
                 final InformationAdapter adapter = new InformationAdapter(GateInformation.this, detailList);
                 lvDetails.setAdapter(adapter);
