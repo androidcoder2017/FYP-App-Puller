@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -32,7 +34,6 @@ import java.util.Map;
 public class GateInformation extends AppCompatActivity {
 
     TextView tvTerminal, tvGateNumber, tvDetails;
-    ImageView ivDirection;
     ListView lvDetails;
 
     DatabaseReference mDatabaseDetails;
@@ -40,7 +41,7 @@ public class GateInformation extends AppCompatActivity {
     List<Information> detailList;
 
     private Query mQueryDate, mQueryTime;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +49,6 @@ public class GateInformation extends AppCompatActivity {
 
         tvTerminal = (TextView)findViewById(R.id.textViewTerminal);
         tvGateNumber = (TextView)findViewById(R.id.textViewGateNumber);
-        ivDirection = (ImageView)findViewById(R.id.imageView);
         tvDetails = (TextView)findViewById(R.id.details);
 
         lvDetails = (ListView)findViewById(R.id.lvDetails);
@@ -101,6 +101,16 @@ public class GateInformation extends AppCompatActivity {
 
                 final InformationAdapter adapter = new InformationAdapter(GateInformation.this, detailList);
                 lvDetails.setAdapter(adapter);
+
+                lvDetails.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Information info = detailList.get(position);
+                        Intent intent = new Intent(GateInformation.this, DirectionDetailsActivity.class);
+                        intent.putExtra("direction", info.getDirection());
+                        startActivity(intent);
+                    }
+                });
             }
 
             @Override

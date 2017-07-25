@@ -19,9 +19,7 @@
         <activity android:name=".activity_login" />
         <activity android:name=".ForgetPasswordActivity" />
         <activity android:name=".GateInformation" />
-
+        <activity android:name=".DirectionDetailsActivity"></activity>
     </application>
-
-
 
 </manifest>
