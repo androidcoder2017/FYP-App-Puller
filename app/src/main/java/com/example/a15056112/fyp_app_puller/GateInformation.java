@@ -70,15 +70,14 @@ public class GateInformation extends AppCompatActivity {
         SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
         final String formattedDate = df.format(calendar.getTime());
 
-        SimpleDateFormat tf = new SimpleDateFormat("HH:mm");
-        final String formattedTime = tf.format(calendar.getTime());
+        /*SimpleDateFormat tf = new SimpleDateFormat("HH:mm");
+        final String formattedTime = tf.format(calendar.getTime()); */
 
 
         //mDatabaseDetails = FirebaseDatabase.getInstance().getReference().child("Gate").child(gatename).child("DaySlot").child("24-7-2017").child("Flight").child("19:00");
 
 
         mDatabaseDetails = FirebaseDatabase.getInstance().getReference().child("Gate").child(gatename).child("DaySlot").child(formattedDate).child("Flight");
-
 
 
     }
