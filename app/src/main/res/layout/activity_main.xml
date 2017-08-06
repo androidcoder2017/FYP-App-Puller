@@ -7,28 +7,20 @@
     android:orientation="vertical"
     tools:context="com.example.a15056112.fyp_app_puller.MainActivity">
 
-
-        <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:text="Message" />
-
-
-
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="120dp"
         android:text="Select gate"
+        android:textColor="#000"
         android:textSize="30dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="18dp"
+        android:textColor="#000"
         android:text="Tap on the gate you need to select to display the details and direction of the plane need to move"/>
 
 

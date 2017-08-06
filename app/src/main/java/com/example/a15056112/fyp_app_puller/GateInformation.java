@@ -60,14 +60,14 @@ public class GateInformation extends AppCompatActivity {
         final String terminal = i.getStringExtra("terminalname");
         final String gatename = i.getStringExtra("gatename");
 
-        tvTerminal.setText(terminal);
+        tvTerminal.setText("Terminal: " + terminal);
         tvGateNumber.setText("Gate: " + gatename);
 
         detailList = new ArrayList<>();
 
 
         Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat df = new SimpleDateFormat("dd-M-yyyy");
         final String formattedDate = df.format(calendar.getTime());
 
         /*SimpleDateFormat tf = new SimpleDateFormat("HH:mm");

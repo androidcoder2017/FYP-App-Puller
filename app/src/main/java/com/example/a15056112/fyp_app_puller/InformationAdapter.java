@@ -2,6 +2,7 @@ package com.example.a15056112.fyp_app_puller;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
@@ -47,6 +48,10 @@ public class InformationAdapter extends ArrayAdapter<Information> {
         textViewGateID.setText(info.getGateID());
         textViewPlaneID.setText(info.getPlaneID());
         textViewTime.setText(info.getTime());
+
+
+        listViewDetails.setBackgroundColor(Color.RED);
+
 
         return listViewDetails;
     }
