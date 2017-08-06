@@ -2,8 +2,10 @@ package com.example.a15056112.fyp_app_puller;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
@@ -48,8 +50,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        ActionBar bar = getSupportActionBar();
+        bar.setBackgroundDrawable(new ColorDrawable(Color.RED));
+
         lv = (ListView)findViewById(R.id.lv);
-        lv.setBackgroundColor(Color.RED);
         //sv = (SearchView)findViewById(R.id.searchview);
 
         mDatabaseGates = FirebaseDatabase.getInstance().getReference().child("Gate");

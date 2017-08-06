@@ -1,10 +1,18 @@
 package com.example.a15056112.fyp_app_puller;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.support.annotation.NonNull;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.SearchView;
 import android.text.Html;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -37,8 +45,9 @@ public class GateInformation extends AppCompatActivity {
     ListView lvDetails;
 
     DatabaseReference mDatabaseDetails;
-    DatabaseReference mDatabaseDetails1;
     List<Information> detailList;
+
+    InformationAdapter adapter;
 
     private Query mQueryDate, mQueryTime;
 
@@ -46,6 +55,9 @@ public class GateInformation extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gate_information);
+
+        ActionBar bar = getSupportActionBar();
+        bar.setBackgroundDrawable(new ColorDrawable(Color.RED));
 
         tvTerminal = (TextView)findViewById(R.id.textViewTerminal);
         tvGateNumber = (TextView)findViewById(R.id.textViewGateNumber);
@@ -64,7 +76,6 @@ public class GateInformation extends AppCompatActivity {
         tvGateNumber.setText("Gate: " + gatename);
 
         detailList = new ArrayList<>();
-
 
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat df = new SimpleDateFormat("dd-M-yyyy");
@@ -118,4 +129,5 @@ public class GateInformation extends AppCompatActivity {
             }
         });
     }
+
 }

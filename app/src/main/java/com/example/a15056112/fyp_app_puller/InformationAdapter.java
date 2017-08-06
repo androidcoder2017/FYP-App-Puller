@@ -49,8 +49,11 @@ public class InformationAdapter extends ArrayAdapter<Information> {
         textViewPlaneID.setText(info.getPlaneID());
         textViewTime.setText(info.getTime());
 
-
-        listViewDetails.setBackgroundColor(Color.RED);
+        if (info.getDirection().equalsIgnoreCase("not updated")) {
+            listViewDetails.setBackgroundColor(Color.RED);
+        } else {
+            listViewDetails.setBackgroundColor(Color.GREEN);
+        }
 
 
         return listViewDetails;
