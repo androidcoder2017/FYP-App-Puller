@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
@@ -27,6 +28,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 
+import java.lang.reflect.GenericArrayType;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +41,9 @@ public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
-    
+
+    ArrayList<User> users = new ArrayList<User>();
+
     ListView lv;
 
     List<Gate> gateList;
@@ -70,7 +74,8 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(loginIntent);
                 } else {
                     String currentUserId = mAuth.getCurrentUser().getUid();
-
+                    mDatabaseCurrentUser = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUserId);
+                    retrieve();
 
                 }
             }
@@ -187,6 +192,37 @@ public class MainActivity extends AppCompatActivity {
 
     private void logout() {
         mAuth.signOut();
+    }
+
+    public ArrayList<User> retrieve() {
+        mDatabaseCurrentUser.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                User user = dataSnapshot.getValue(User.class);
+
+                if(user.getRole().equals("Puller")){
+                    Toast.makeText(MainActivity.this, "Welcome " + user.getName(), Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(MainActivity.this, "Error your account is not eligible to login", Toast.LENGTH_SHORT).show();
+                    Intent loginIntent = new Intent(MainActivity.this, activity_login.class);
+                    loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(loginIntent);
+                }
+
+
+
+
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        return users;
     }
 
 }

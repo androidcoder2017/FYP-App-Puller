@@ -3,6 +3,8 @@
     package="com.example.a15056112.fyp_app_puller">
 
     <supports-screens
+        android:smallScreens="true"
+        android:normalScreens="true"
         android:largeScreens="true"
         android:xlargeScreens="true">
 

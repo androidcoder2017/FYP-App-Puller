@@ -77,6 +77,8 @@ public class activity_login extends AppCompatActivity {
                     if(task.isSuccessful()){
                         checkUserExist();
                         mProgress.dismiss();
+                    } else {
+                        Toast.makeText(activity_login.this, "Error Login", Toast.LENGTH_LONG).show();
                     }
                 }
             });
