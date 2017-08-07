@@ -8,6 +8,10 @@
         android:title="Search">
 
     </item>
+
+    <item android:id="@+id/action_message"
+        android:title="Message"
+        app:showAsAction="never"/>
     <item android:id="@+id/action_logout"
         android:title="Log Out"
         app:showAsAction="never"/>

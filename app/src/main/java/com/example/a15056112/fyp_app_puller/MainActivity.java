@@ -49,6 +49,9 @@ public class MainActivity extends AppCompatActivity {
     List<Gate> gateList;
 
     GateAdapter adapter;
+
+    String name, role;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
         bar.setBackgroundDrawable(new ColorDrawable(Color.RED));
 
         lv = (ListView)findViewById(R.id.lv);
-        //sv = (SearchView)findViewById(R.id.searchview);
 
         mDatabaseGates = FirebaseDatabase.getInstance().getReference().child("Gate");
         mQuery = mDatabaseGates.orderByChild("gateName");
@@ -186,6 +188,10 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_logout) {
             logout();
+        } else if(item.getItemId() == R.id.action_message) {
+            Intent intent = new Intent(MainActivity.this, ChatActivity.class);
+            intent.putExtra("name", name + "("+ role +")");
+            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }
@@ -203,17 +209,15 @@ public class MainActivity extends AppCompatActivity {
 
                 if(user.getRole().equals("Puller")){
                     Toast.makeText(MainActivity.this, "Welcome " + user.getName(), Toast.LENGTH_SHORT).show();
+                    name = user.getName().toString();
+                    role = user.getRole().toString();
+                    Log.i("TAG", "onDataChange: "+ name);
                 } else {
                     Toast.makeText(MainActivity.this, "Error your account is not eligible to login", Toast.LENGTH_SHORT).show();
                     Intent loginIntent = new Intent(MainActivity.this, activity_login.class);
                     loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(loginIntent);
                 }
-
-
-
-
-
             }
 
             @Override
