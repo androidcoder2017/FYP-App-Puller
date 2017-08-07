@@ -25,8 +25,6 @@ public class DirectionDetailsActivity extends AppCompatActivity {
         tvDirectionTitle = (TextView)findViewById(R.id.directionTitle);
         ivDirection = (ImageView)findViewById(R.id.ivDirection);
 
-        tvDirectionTitle.setText(Html.fromHtml("<h1><u><b>Direction</b></u></h1>"));
-
         Intent i = getIntent();
         String direction = i.getStringExtra("direction");
 

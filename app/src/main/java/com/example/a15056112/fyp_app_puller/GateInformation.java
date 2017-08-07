@@ -65,7 +65,6 @@ public class GateInformation extends AppCompatActivity {
 
         lvDetails = (ListView)findViewById(R.id.lvDetails);
 
-        tvDetails.setText(Html.fromHtml("<h1><u><b>Plane Details</b></u></h1>"));
 
         Intent i = getIntent();
 
@@ -81,15 +80,7 @@ public class GateInformation extends AppCompatActivity {
         SimpleDateFormat df = new SimpleDateFormat("dd-M-yyyy");
         final String formattedDate = df.format(calendar.getTime());
 
-        /*SimpleDateFormat tf = new SimpleDateFormat("HH:mm");
-        final String formattedTime = tf.format(calendar.getTime()); */
-
-
-        //mDatabaseDetails = FirebaseDatabase.getInstance().getReference().child("Gate").child(gatename).child("DaySlot").child("24-7-2017").child("Flight").child("19:00");
-
-
         mDatabaseDetails = FirebaseDatabase.getInstance().getReference().child("Gate").child(gatename).child("DaySlot").child(formattedDate).child("Flight");
-
 
     }
 
@@ -129,5 +120,48 @@ public class GateInformation extends AppCompatActivity {
             }
         });
     }
+
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//
+//        final MenuItem searchItem = menu.findItem(R.id.item_search);
+//        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+//
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                final List<Information> gateSearchList = new ArrayList<Information>();
+//                ListView lvSearch;
+//
+//                lvSearch = (ListView)findViewById(R.id.lv);
+//                for (Information info : detailList) {
+//                    if (info.getFlightNo().toLowerCase().contains(newText.toLowerCase()) || info.getDirection().toLowerCase().contains(newText.toLowerCase())
+//                            || info.getTime().toLowerCase().contains(newText.toLowerCase()) || info.getPlaneID().toLowerCase().contains(newText.toLowerCase()) ) {
+//                        gateSearchList.add(info);
+//                        lvSearch.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//                            @Override
+//                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                                Information information = gateSearchList.get(position);
+//                                Intent intent = new Intent(getApplicationContext(), DirectionDetailsActivity.class);
+//                                intent.putExtra("direction", information.getDirection());
+//                                startActivity(intent);
+//                            }
+//                        });
+//                    }
+//                }
+//
+//                adapter = new InformationAdapter(GateInformation.this, gateSearchList);
+//                lvSearch.setAdapter(adapter);
+//                return true;
+//            }
+//        });
+//
+//        return super.onCreateOptionsMenu(menu);
+//    }
 
 }

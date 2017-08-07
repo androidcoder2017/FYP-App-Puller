@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/loginEmailField"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="23dp"
+        android:inputType="textPersonName"
+        android:textSize="30dp"
+        android:hint="Email..."
+        />
+
+    <EditText
+        android:id="@+id/loginPasswordField"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:layout_alignEnd="@+id/loginEmailField"
+        android:layout_alignRight="@+id/loginEmailField"
+        android:layout_below="@+id/loginEmailField"
+        android:layout_marginTop="13dp"
+        android:inputType="textPassword"
+        android:textSize="30dp"
+        android:hint="Password..." />
+
+    <Button
+        android:id="@+id/loginBtn"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_above="@+id/forgetPasswordBtn"
+        android:layout_centerHorizontal="true"
+        android:textSize="30dp"
+        android:text="Login" />
+
+
+    <Button
+        android:id="@+id/forgetPasswordBtn"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="16dp"
+        android:textSize="30dp"
+        android:text="Forget your Password?" />
+
+</RelativeLayout>
