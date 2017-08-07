@@ -1,8 +1,10 @@
 package com.example.a15056112.fyp_app_puller;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -54,8 +56,11 @@ public class Chat_Room extends AppCompatActivity {
                 Map<String,Object> map2 = new HashMap<String, Object>();
                 map2.put("name",user_name);
                 map2.put("msg",input_msg.getText().toString());
-
                 message_root.updateChildren(map2);
+
+                input_msg.setText("");
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(input_msg.getWindowToken(), 0);
             }
         });
 
