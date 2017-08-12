@@ -15,6 +15,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -25,7 +28,7 @@ public class Chat_Room extends AppCompatActivity {
     private EditText input_msg;
     private TextView chat_conversation;
 
-    private String user_name,room_name;
+    private String user_name,room_name, time;
     private DatabaseReference root ;
     private String temp_key;
 
@@ -44,6 +47,9 @@ public class Chat_Room extends AppCompatActivity {
 
         root = FirebaseDatabase.getInstance().getReference().child(room_name);
 
+        DateFormat df = new SimpleDateFormat("h:mm a");
+        time = df.format(Calendar.getInstance().getTime());
+
         btn_send_msg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -56,6 +62,8 @@ public class Chat_Room extends AppCompatActivity {
                 Map<String,Object> map2 = new HashMap<String, Object>();
                 map2.put("name",user_name);
                 map2.put("msg",input_msg.getText().toString());
+                map2.put("time",time);
+
                 message_root.updateChildren(map2);
 
                 input_msg.setText("");
@@ -96,7 +104,7 @@ public class Chat_Room extends AppCompatActivity {
 
     }
 
-    private String chat_msg,chat_user_name;
+    private String chat_msg,chat_user_name,chat_user_time;
 
     private void append_chat_conversation(DataSnapshot dataSnapshot) {
 
@@ -106,8 +114,9 @@ public class Chat_Room extends AppCompatActivity {
 
             chat_msg = (String) ((DataSnapshot)i.next()).getValue();
             chat_user_name = (String) ((DataSnapshot)i.next()).getValue();
+            chat_user_time = (String) ((DataSnapshot)i.next()).getValue();
 
-            chat_conversation.append(chat_user_name +" : "+chat_msg +" \n");
+            chat_conversation.append(chat_user_name +" : "+chat_msg +" \n" + chat_user_time+" \n");
         }
 
 

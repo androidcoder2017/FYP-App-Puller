@@ -54,7 +54,7 @@ public class GateAdapter extends ArrayAdapter<Gate> {
         textViewTerminal.setText(gate.getTerminalName());
         textViewGate.setText(gate.getGateName());
 
-        listViewGate.setBackgroundColor(Color.RED);
+        listViewGate.setBackgroundColor(Color.WHITE);
 
         return listViewGate;
     }

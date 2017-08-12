@@ -121,47 +121,4 @@ public class GateInformation extends AppCompatActivity {
         });
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//
-//        final MenuItem searchItem = menu.findItem(R.id.item_search);
-//        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
-//
-//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String query) {
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String newText) {
-//                final List<Information> gateSearchList = new ArrayList<Information>();
-//                ListView lvSearch;
-//
-//                lvSearch = (ListView)findViewById(R.id.lv);
-//                for (Information info : detailList) {
-//                    if (info.getFlightNo().toLowerCase().contains(newText.toLowerCase()) || info.getDirection().toLowerCase().contains(newText.toLowerCase())
-//                            || info.getTime().toLowerCase().contains(newText.toLowerCase()) || info.getPlaneID().toLowerCase().contains(newText.toLowerCase()) ) {
-//                        gateSearchList.add(info);
-//                        lvSearch.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//                            @Override
-//                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                                Information information = gateSearchList.get(position);
-//                                Intent intent = new Intent(getApplicationContext(), DirectionDetailsActivity.class);
-//                                intent.putExtra("direction", information.getDirection());
-//                                startActivity(intent);
-//                            }
-//                        });
-//                    }
-//                }
-//
-//                adapter = new InformationAdapter(GateInformation.this, gateSearchList);
-//                lvSearch.setAdapter(adapter);
-//                return true;
-//            }
-//        });
-//
-//        return super.onCreateOptionsMenu(menu);
-//    }
-
 }
