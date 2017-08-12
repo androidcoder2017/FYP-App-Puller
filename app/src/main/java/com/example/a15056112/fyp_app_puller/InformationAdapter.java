@@ -40,6 +40,8 @@ public class InformationAdapter extends ArrayAdapter<Information> {
         TextView textViewPlaneID = (TextView)listViewDetails.findViewById(R.id.textViewPlaneID);
         TextView textViewTime = (TextView)listViewDetails.findViewById(R.id.textViewTime);
 
+        TextView tvTime = (TextView)listViewDetails.findViewById(R.id.time);
+
         Information info = detailList.get(position);
 
         textViewDate.setText(info.getDate());
@@ -51,8 +53,12 @@ public class InformationAdapter extends ArrayAdapter<Information> {
 
         if (info.getDirection().equalsIgnoreCase("not updated")) {
             listViewDetails.setBackgroundColor(Color.RED);
+            textViewTime.setTextColor(Color.WHITE);
+            tvTime.setTextColor(Color.WHITE);
         } else {
             listViewDetails.setBackgroundColor(Color.GREEN);
+            textViewTime.setTextColor(Color.RED);
+            tvTime.setTextColor(Color.RED);
         }
 
 
